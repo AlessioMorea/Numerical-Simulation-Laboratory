@@ -1,0 +1,13 @@
+rm -rf gasNotEq/*.dat
+rm -rf liquidNotEq/*.dat
+rm -rf solidNotEq/*.dat
+rm -rf gas/*.dat
+rm -rf liquid/*.dat
+rm -rf solid/*.dat
+rm -rf gasNotEq/*.out
+rm -rf liquidNotEq/*.out
+rm -rf solidNotEq/*.out
+rm -rf gas/*.out
+rm -rf liquid/*.out
+rm -rf solid/*.out
+rm -rf frames/*.xyz
