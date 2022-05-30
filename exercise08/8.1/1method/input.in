@@ -1,0 +1,14 @@
+0
+2.7
+100
+1000
+0
+1.0
+1.0
+  ReadInput >> restart;
+  ReadInput >> delta;(NOT USED)
+  ReadInput >> nblk;
+  ReadInput >> nstep;
+  ReadInput >> n_equilibration;
+  ReadInput >>mu;
+  ReadInput >>sigma;
