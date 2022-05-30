@@ -1,0 +1,18 @@
+1000
+34
+100
+0.1
+0.03
+0.03
+0.03
+0.03
+0.8
+  Input>>m_N_Generation;
+  Input>>m_NumberCities;
+  Input>>m_NumberParents;
+  Input>>m_p;
+  Input>>m_p_Pair;
+  Input>>m_p_Inversion;
+  Input>>m_p_Shift;
+  Input>>m_p_Permutation
+  Input>>m_p_Selection;
