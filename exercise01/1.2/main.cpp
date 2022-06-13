@@ -80,7 +80,7 @@ for(int t=0;t<4;t++){
 		double sum_L=0;
 		for(int j=0;j<N[t];j++){
 			
-			sum_U += rnd.Rannyu(0,7);		
+			sum_U += rnd.Rannyu(1.,7.);		
 			sum_E += rnd.Exponential(1.);		
 			sum_L += rnd.Cauchy_Lorentz(1.,0.);		
 

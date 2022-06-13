@@ -181,8 +181,9 @@ int main(int argc, char *argv[]) {
     double L = n_simulations / N; // numbers in each block
     Data_Blocking_Method(results, i, N, L, dist);
     results[0][1] = 0;
-    Print("discrete.dat", n_steps, results);
+    
   }
+  Print("discrete.dat", n_steps, results);
 
   vector<vector<double>> rc(M, vector<double>(3));
 
@@ -223,8 +224,8 @@ int main(int argc, char *argv[]) {
     double L = n_simulations / N; // numbers in each block
     Data_Blocking_Method(resultsc, i, N, L, dist);
     resultsc[0][1] = 0;
-    Print("continue.dat", n_steps, resultsc);
+   
   }
-
+  Print("continue.dat", n_steps, resultsc);
   return 0;
 }
