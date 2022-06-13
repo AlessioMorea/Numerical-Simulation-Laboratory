@@ -37,7 +37,9 @@ int main(int argc, char *argv[])
     beta = 1.0 / temp;
 
     cout << "Starting Simulation for T=" << temp << endl;
-
+    //same initial configuration for each T
+    Restart("config.in");
+    
     for (int i = 0; i < nequilibration; i++)
     {
       Move(metro);
@@ -54,7 +56,7 @@ int main(int argc, char *argv[])
       Averages(iblk); // Print results for current block
     }
     ConfFinal(); // Write final configuration
-
+    
     temp -= 0.05;
   }
   return 0;
@@ -63,7 +65,7 @@ int main(int argc, char *argv[])
 void Input(void)
 {
   ifstream ReadInput, ReadConf;
-
+  ofstream SaveConf;
   cout << "Classic 1D Ising model             " << endl;
   cout << "Monte Carlo simulation             " << endl
        << endl;
@@ -137,15 +139,22 @@ void Input(void)
     ReadConf.close();
   }
   else
-  {
+  { 
+    SaveConf.open("config.in");
+    
     // initial configuration
     for (int i = 0; i < nspin; ++i)
     {
-      if (rnd.Rannyu() >= 0.5)
+      if (rnd.Rannyu() >= 0.5){
         s[i] = 1;
-      else
+      }
+      else{
         s[i] = -1;
+      }
+      SaveConf << s[i]<<endl;
     }
+    
+    SaveConf.close();
   }
   // Evaluate energy etc. of the initial configuration
   Measure();
@@ -230,6 +239,15 @@ void Measure()
   walker[ic] = u * u;
   walker[im] = m;
   walker[ix] = m * m;
+}
+void Restart(string a){
+  ifstream ReadConf;
+  ReadConf.open(a);
+    for (int i = 0; i < nspin; ++i)
+    {
+      ReadConf >> s[i];
+    }
+    ReadConf.close();
 }
 
 void Reset(int iblk) // Reset block averages

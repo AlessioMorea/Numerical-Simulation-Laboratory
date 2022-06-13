@@ -13,6 +13,7 @@ _/    _/  _/_/_/  _/_/_/_/ email: Davide.Galli@unimi.it
 
 //Random numbers
 #include "random.h"
+#include <string>
 int seed[4];
 Random rnd;
 
@@ -50,7 +51,7 @@ void Measure(void);
 double Boltzmann(int, int);
 int Pbc(int);
 double Error(double,double,int);
-
+void Restart(std::string);
 #endif
 
 /****************************************************************
