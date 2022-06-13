@@ -129,8 +129,9 @@ data_old.close();
   temp=0.0;
   sigma = sigma_best;
   mu = mu_best;
-  nstep=nstep*1000;
-
+  nstep=nstep*10;
+  ofstream Gofr1;
+  Gofr1.open(folder + "output_gofr1.dat", ios::app);
   for (int iblk = 1; iblk <= nblk; iblk++) // Simulation
   {
     Reset(iblk); // Reset block averages
@@ -138,9 +139,11 @@ data_old.close();
       Move();
       Measure();
       Accumulate(); // Update block averages
+      Gofr1<<x<<endl;
     }
     Averages(iblk); // Print results for current block
   }
+  Gofr1.close();
 cout << "sigma old = " << sigma_old << " | mu old = " << mu_old<< " | energy = " << energy_old << endl;
 cout << "sigma best = " << sigma_best << " | mu best = " << mu_best<< " | energy best = " << energy_best << endl;
 
@@ -209,15 +212,12 @@ void Input(void) {
 
   // Prepare arrays for measurements
   iv = 0; // Hamiltonian/psi
-  // it = 1; //Temperature
-  // ik = 2; //Kinetic energy
-  // ie = 3; //Total energy
-  // ipr = 1;//Pressure
+ 
   n_props = 1; // Number of observables
-  igofr = 1;
-  nbins = 100;
-  n_props += nbins;
-  bin_size = (hb - lb) / (double)n_bins;
+  //igofr = 1;
+  //nbins = 100;
+  //n_props += nbins;
+  //bin_size = (hb - lb) / (double)n_bins;
   // from x=-6 to x=+6
 
   // Read initial configuration
@@ -258,13 +258,13 @@ void Measure() // Properties measurement
   double v = 0.0;
   int r = 0;
   // reset the hystogram
-  for (int k = igofr; k < igofr + nbins; ++k)
-    walker[k] = 0.0;
+  //for (int k = igofr; k < igofr + nbins; ++k)
+  //  walker[k] = 0.0;
 
   // Bin
 
-  r = igofr + int((x - lb) / bin_size);
-  walker[r]++;
+  //r = igofr + int((x - lb) / bin_size);
+  //walker[r]++;
 
   // Hamiltonian
   v = (-0.5 * SecondDerivative(x)) / fT(x) + Potential(x);
@@ -310,29 +310,29 @@ void Averages(int iblk) // Print results for current block
   cout << "Acceptance rate " << accepted / attempted << endl << endl;
 
   Energy.open(folder + "output_energy.dat", ios::app);
-  Gofr.open(folder + "output_gofr.dat", ios::app);
+  //Gofr.open(folder + "output_gofr.dat", ios::app);
 
   stima_Ham = blk_av[iv] / blk_norm;
   glob_av[iv] += stima_Ham;
   glob_av2[iv] += stima_Ham * stima_Ham;
   err_Ham = Error(glob_av[iv], glob_av2[iv], iblk);
-
+/*not needed, i do it in python
   for (int i = igofr; i < igofr + nbins; i++) {
     stima_g[i] = blk_av[i] / (bin_size * nstep);
     glob_av[i] += stima_g[i];
     glob_av2[i] += stima_g[i] * stima_g[i];
     err_g[i] = Error(glob_av[i], glob_av2[i], iblk);
   }
-
+*/
   if (temp == 0.0) {
-    if (iblk == nblk) {
+    /*if (iblk == nblk) {
       for (int i = igofr; i < igofr + nbins; i++) {
         r = bin_size * (i - igofr) + lb;
         Gofr << r << " " << stima_g[i] << " " << glob_av[i] / iblk << " "
              << err_g[i] << endl;
       }
     }
-
+    */
     Energy << iblk << " " << stima_Ham << " " << glob_av[iv] / (double)iblk
            << " " << err_Ham << endl;
   }
@@ -340,7 +340,7 @@ void Averages(int iblk) // Print results for current block
   cout << "----------------------------" << endl << endl;
 
   Energy.close();
-  Gofr.close();
+ // Gofr.close();
 }
 
 double Error(double sum, double sum2, int iblk) {
