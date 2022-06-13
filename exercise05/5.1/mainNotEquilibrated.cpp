@@ -127,7 +127,7 @@ vector<double> MetropolisNormal(vector<double> x, int &Accepted, double mean,dou
 }
 
 void Simulation(string method,int M,int N,int L,vector<double> InputVariables,Random & rnd,string folder,double inp1,double inp2,double (&f)(vector<double>),vector<double>(*function)(vector<double> , int &, double ,double ,Random &, double (&f)(vector<double>))){
-  vector<vector<double>> r(M, vector<double>(3));
+  vector<vector<double> > r(M, vector<double>(3));
   r[0][0] = InputVariables[0];
   r[0][1] = InputVariables[1];
   r[0][2] = InputVariables[2];

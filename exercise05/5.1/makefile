@@ -1,13 +1,16 @@
 CC = g++
 CFLAGS = -Wall -O3 --std=c++11
 
-mainNotEquilibrated.exe : mainNotEquilibrated.o random.o
-	$(CC) random.o mainNotEquilibrated.o -o mainNotEquilibrated.exe
+
 main.exe : main.o random.o
 	$(CC) random.o main.o -o main.exe
 main.o : main.cpp
 	$(CC) -c main.cpp -o main.o $(CFLAGS)
+mainNotEquilibrated.exe : mainNotEquilibrated.o random.o
+	$(CC) random.o mainNotEquilibrated.o -o mainNotEquilibrated.exe
+mainNotEquilibrated.o : mainNotEquilibrated.cpp
+	$(CC) -c mainNotEquilibrated.cpp -o mainNotEquilibrated.o $(CFLAGS)
 random.o : random.cpp random.h
 	$(CC) -c random.cpp -o random.o $(CFLAGS)
 clean :
-	rm *.o main.exe seed.out
+	rm *.o main.exe seed.out mainNotEquilibrated.exe

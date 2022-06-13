@@ -226,7 +226,7 @@ int main(int argc, char *argv[]) {
   Simulation("Normal100", M, N, L, InputVariables, rnd, folder, 0, 0.758, f100, MetropolisNormal);
   Simulation("Uniform210", M, N, L, InputVariables, rnd, folder, -2.95, +2.95, f210, MetropolisUniform);
   Simulation("Normal210", M, N, L, InputVariables, rnd, folder, 0, 1.878, f210, MetropolisNormal);
-//SEI QUI
+
 
 
   rnd.SaveSeed();
